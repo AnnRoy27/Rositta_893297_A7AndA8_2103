@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final test lab</title>
+</head>
+<body>
+    <h1 style="color:green "id ="header">Updated Table Generator</h1>
+    <div id="inputsContainer"> Number of rows: <input type="text" id="rowInput" /><br><br>
+    Number of cols: <input type="text" id="colInput" /><br><br></div>
+     <button id="generateTable" onclick="generateTable()">Generate Table</button><br><br>
+     <button id="addColumnButton" onclick="addNewColumn()">Add Column</button>
+     <button id="addRowButton" onclick="addNewRow()">Add Row</button>
+     <div id="tableWrapper"></div>
+    
+    <script>
+        function generateTable() {
+            var rows = parseInt(document.getElementById('rowInput').value);
+            var cols = parseInt(document.getElementById('colInput').value);
+
+            var table = document.createElement('table');
+            for (var i = 0; i < rows; i++) {
+                var row = table.insertRow();
+                for (var j = 0; j < cols; j++) {
+                    var cell = row.insertCell();
+                    cell.innerHTML = 'Row ' + (i + 1) + ' Column ' + (j + 1);
+                }
+            }
+
+            var tableWrapper = document.getElementById('tableWrapper');
+            tableWrapper.innerHTML = '';
+            tableWrapper.appendChild(table);
+
+            hideElements();
+        }
+
+      
+        function addNewRow() {
+            var table = document.querySelector('table');
+            if (table) {
+                var row = table.insertRow();
+                var cells = table.rows[0].cells.length;
+                for (var i = 0; i < cells; i++) {
+                    var cell = row.insertCell();
+                    cell.innerHTML = 'New Row';
+                }
+            }
+        }
+        function addNewColumn() {
+            var table = document.querySelector('table');
+            if (table) {
+                var rows = table.rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var cell = rows[i].insertCell();
+                    cell.innerHTML = 'New Column';
+                }
+            }
+        }
+
+
+        function hideElements() {
+            document.getElementById('header').style.display = 'none';
+            document.querySelectorAll('input[type="text"]').forEach(function(input) {
+                input.style.display = 'none'; 
+            });
+            document.getElementById('generateTable').style.display = 'none'; 
+            document.getElementById('inputsContainer').style.display = 'none'; 
+        }
+    </script>
+</body>
+</html>
